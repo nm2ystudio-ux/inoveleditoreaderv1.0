@@ -2,11 +2,10 @@
 <html lang="ms">
 <head>
   <meta charset="utf-8">
-  <title>Studio Novel Minimal — Simpan, Sunting, Backup & Mod Buku</title>
+  <title>Studio Novel Minimal v2.1 — Editor + Backup + Mod Buku</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
     :root{
-      --bg:#f5f5f7;
       --card:#ffffff;
       --border:#d4d4dd;
       --border-soft:#e3e3ec;
@@ -36,126 +35,55 @@
       border-bottom:1px solid var(--border-soft);
       background:rgba(255,255,255,0.9);
       backdrop-filter:blur(10px);
-      position:sticky;
-      top:0;
-      z-index:10;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
+      position:sticky; top:0; z-index:10;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
     }
-    header .title{
-      font-weight:600;
-      letter-spacing:.02em;
-      font-size:15px;
-    }
-    header .subtitle{
-      font-size:12px;
-      color:var(--muted);
-    }
-    header .right{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      font-size:11px;
-      color:var(--muted);
-    }
-    header .pill{
-      padding:4px 10px;
-      border-radius:999px;
-      border:1px solid var(--border-soft);
-      background:#f9fafb;
-      white-space:nowrap;
-    }
+    header .title{font-weight:600; letter-spacing:.02em; font-size:15px;}
+    header .subtitle{font-size:12px; color:var(--muted);}
+    header .right{display:flex; align-items:center; gap:8px; font-size:11px; color:var(--muted);}
+    header .pill{padding:4px 10px; border-radius:999px; border:1px solid var(--border-soft); background:#f9fafb; white-space:nowrap;}
 
-    main{
-      display:flex;
-      flex:1;
-      padding:16px;
-      gap:16px;
-    }
+    main{display:flex; flex:1; padding:16px; gap:16px;}
 
     /* Sidebar */
     .sidebar{
-      width:270px;
-      max-width:100%;
+      width:285px; max-width:100%;
       background:var(--card);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
       padding:12px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
+      display:flex; flex-direction:column; gap:10px;
     }
-    .section-title{
-      font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      color:var(--muted);
-    }
-    .field-label{
-      font-size:11px;
-      color:var(--muted);
-      margin-bottom:4px;
-    }
+    .section-title{font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted);}
+    .field-label{font-size:11px; color:var(--muted); margin-bottom:4px;}
     select,input[type="text"]{
-      width:100%;
-      padding:7px 9px;
-      border-radius:7px;
-      border:1px solid var(--border);
-      font-size:12px;
-      outline:none;
-      background:#f9fafb;
+      width:100%; padding:7px 9px;
+      border-radius:7px; border:1px solid var(--border);
+      font-size:12px; outline:none; background:#f9fafb;
     }
     select:focus,input[type="text"]:focus,textarea:focus{
       border-color:var(--accent);
       box-shadow:0 0 0 1px rgba(37,99,235,0.16);
     }
     .btn{
-      font-size:12px;
-      padding:7px 10px;
-      border-radius:7px;
-      border:1px solid transparent;
-      background:#e5e7eb;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:6px;
+      font-size:12px; padding:7px 10px;
+      border-radius:7px; border:1px solid transparent;
+      background:#e5e7eb; cursor:pointer;
+      display:inline-flex; align-items:center; justify-content:center; gap:6px;
       white-space:nowrap;
     }
-    .btn-primary{
-      background:var(--accent);
-      color:#fff;
-    }
-    .btn-outline{
-      background:#f9fafb;
-      border-color:var(--border);
-    }
-    .btn-ghost{
-      background:transparent;
-      border-color:transparent;
-    }
-    .btn-sm{
-      padding:5px 8px;
-      font-size:11px;
-    }
-    .btn:disabled{
-      opacity:.5;
-      cursor:not-allowed;
-    }
+    .btn-primary{background:var(--accent); color:#fff;}
+    .btn-outline{background:#f9fafb; border-color:var(--border);}
+    .btn-ghost{background:transparent; border-color:transparent;}
+    .btn-sm{padding:5px 8px; font-size:11px;}
+    .btn-danger{background:#fee2e2; border-color:#fecaca; color:#b91c1c;}
+    .btn:disabled{opacity:.5; cursor:not-allowed;}
 
-    .sidebar-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:6px;
-    }
+    .sidebar-actions{display:flex; flex-wrap:wrap; gap:6px;}
     .work-list{
       border-top:1px solid var(--border-soft);
-      padding-top:8px;
-      margin-top:4px;
-      flex:1;
-      overflow:auto;
+      padding-top:8px; margin-top:4px;
+      flex:1; overflow:auto;
     }
     .work-item{
       padding:7px 8px;
@@ -163,94 +91,59 @@
       border:1px solid transparent;
       cursor:pointer;
       margin-bottom:4px;
-      display:flex;
-      flex-direction:column;
-      gap:2px;
+      display:flex; flex-direction:column; gap:2px;
     }
     .work-item.active{
       border-color:var(--accent);
       background:var(--accent-soft);
     }
-    .work-item .title{
-      font-size:12px;
-      font-weight:500;
-    }
+    .work-item .title{font-size:12px; font-weight:500;}
     .work-item .meta{
-      font-size:11px;
-      color:var(--muted);
-      display:flex;
-      justify-content:space-between;
-      gap:4px;
+      font-size:11px; color:var(--muted);
+      display:flex; justify-content:space-between; gap:4px;
     }
     .badge{
-      font-size:10px;
-      padding:2px 6px;
+      font-size:10px; padding:2px 6px;
       border-radius:999px;
       border:1px solid var(--border-soft);
       background:#f9fafb;
     }
     .badge-backup{
-      border-color:#f97373;
-      color:#b91c1c;
-      background:#fef2f2;
+      border-color:#f97373; color:#b91c1c; background:#fef2f2;
     }
 
     /* Editor panel */
     .editor-panel{
-      flex:1;
-      min-width:0;
+      flex:1; min-width:0;
       background:var(--card);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
       padding:12px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
+      display:flex; flex-direction:column; gap:10px;
     }
     .editor-top{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px 10px;
-      align-items:flex-end;
+      display:flex; flex-wrap:wrap;
+      gap:8px 10px; align-items:flex-end;
       border-bottom:1px solid var(--border-soft);
       padding-bottom:8px;
     }
-    .field-group{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-      min-width:160px;
-    }
-    .field-group.inline{
-      flex-direction:row;
-      align-items:center;
-      gap:6px;
-    }
+    .field-group{display:flex; flex-direction:column; gap:4px; min-width:160px;}
     .editor-actions{
       margin-left:auto;
-      display:flex;
-      flex-wrap:wrap;
-      gap:6px;
-      align-items:center;
+      display:flex; flex-wrap:wrap; gap:6px; align-items:center;
     }
-
     .chapters-bar{
-      display:flex;
-      align-items:center;
-      gap:6px;
+      display:flex; align-items:center; gap:6px;
       margin-top:4px;
       border-bottom:1px solid var(--border-soft);
       padding-bottom:4px;
       overflow:auto;
     }
     .chapter-tab{
-      padding:4px 10px;
-      border-radius:999px;
+      padding:4px 10px; border-radius:999px;
       border:1px solid transparent;
-      font-size:11px;
-      cursor:pointer;
-      background:#f3f4f6;
-      white-space:nowrap;
+      font-size:11px; cursor:pointer;
+      background:#f3f4f6; white-space:nowrap;
     }
     .chapter-tab.active{
       background:var(--accent-soft);
@@ -258,21 +151,19 @@
       color:var(--accent);
       font-weight:500;
     }
-
     textarea{
       width:100%;
-      min-height:320px;
+      min-height:330px;
       resize:vertical;
       padding:10px 12px;
       border-radius:8px;
       border:1px solid var(--border);
       font-size:13px;
-      line-height:1.5;
+      line-height:1.55;
       background:#f9fafb;
       margin-top:6px;
       white-space:pre-wrap;
     }
-
     .editor-footer{
       margin-top:6px;
       display:flex;
@@ -297,138 +188,93 @@
       margin-top:4px;
     }
 
-    /* Cover preview */
+    /* Cover */
     .cover-row{
-      display:flex;
-      align-items:center;
-      gap:10px;
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
       margin-top:6px;
-      flex-wrap:wrap;
     }
     .cover-thumb{
-      width:64px;height:86px;
-      border-radius:8px;
-      border:1px solid var(--border);
+      width:64px; height:86px;
+      border-radius:8px; border:1px solid var(--border);
       background:#f3f4f6;
       overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      display:flex; align-items:center; justify-content:center;
       flex:0 0 auto;
     }
-    .cover-thumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
+    .cover-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
     .cover-meta{
-      font-size:11px;
-      color:var(--muted);
-      display:flex;
-      flex-direction:column;
-      gap:3px;
+      font-size:11px; color:var(--muted);
+      display:flex; flex-direction:column; gap:3px;
       min-width:180px;
     }
     .cover-actions{
-      display:flex;
-      gap:6px;
-      flex-wrap:wrap;
+      display:flex; gap:6px; flex-wrap:wrap;
       margin-left:auto;
     }
 
-    /* BOOK MODE OVERLAY */
+    /* Debug log */
+    .logbox{
+      font-size:11px;
+      color:#0f172a;
+      background:#f8fafc;
+      border:1px solid var(--border-soft);
+      border-radius:8px;
+      padding:8px;
+      max-height:120px;
+      overflow:auto;
+    }
+    .logbox b{color:#111827;}
+    .logline{color:#475569; margin-top:4px; white-space:pre-wrap;}
+
+    /* BOOK MODE */
     .book-overlay{
-      position:fixed;
-      inset:0;
+      position:fixed; inset:0;
       background:rgba(17,24,39,0.65);
       z-index:999;
       display:none;
       padding:18px;
     }
-    .book-overlay.show{ display:flex; }
-    .book-shell{
-      width:min(1020px, 100%);
-      margin:auto;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-    .book-topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      color:#fff;
-      font-size:12px;
-    }
-    .book-topbar .left{
-      display:flex;flex-direction:column;gap:2px;
-    }
-    .book-topbar .t1{font-weight:600;font-size:13px;}
+    .book-overlay.show{display:flex;}
+    .book-shell{width:min(1020px,100%); margin:auto; display:flex; flex-direction:column; gap:10px;}
+    .book-topbar{display:flex; align-items:center; justify-content:space-between; gap:10px; color:#fff; font-size:12px;}
+    .book-topbar .left{display:flex; flex-direction:column; gap:2px;}
+    .book-topbar .t1{font-weight:600; font-size:13px;}
     .book-topbar .t2{opacity:.85;}
-    .book-topbar .actions{
-      display:flex;gap:8px;flex-wrap:wrap;
-    }
-    .book-stage{
-      background:transparent;
-      border-radius:18px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-    }
+    .book-topbar .actions{display:flex; gap:8px; flex-wrap:wrap;}
+
+    .book-stage{display:flex; justify-content:center; align-items:center;}
     .book{
       width:min(980px, 100%);
-      aspect-ratio: 16 / 10;
+      aspect-ratio: 16/10;
       position:relative;
       filter: drop-shadow(var(--book-shadow));
     }
     .spread{
-      position:absolute;
-      inset:0;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:0;
+      position:absolute; inset:0;
+      display:grid; grid-template-columns:1fr 1fr;
       border-radius:16px;
       overflow:hidden;
       background:var(--book-paper);
     }
     .page{
       padding:28px 28px 22px 28px;
-      border-right:1px solid rgba(0,0,0,0.06);
       color:var(--book-ink);
       overflow:hidden;
       position:relative;
+      border-right:1px solid rgba(0,0,0,0.06);
     }
-    .page.right{ border-right:none; border-left:1px solid rgba(0,0,0,0.06); }
+    .page.right{border-right:none; border-left:1px solid rgba(0,0,0,0.06);}
     .page .pnum{
       position:absolute;
-      bottom:10px;
-      left:0; right:0;
+      bottom:10px; left:0; right:0;
       text-align:center;
       font-size:11px;
       color:var(--book-muted);
     }
-    .page .content{
-      height:100%;
-      overflow:hidden;
-      font-size:14px;
-      line-height:1.65;
-      white-space:pre-wrap;
-    }
-    .page .h1{
-      font-weight:700;
-      font-size:18px;
-      margin-bottom:10px;
-    }
-    .page .h2{
-      font-weight:600;
-      font-size:14px;
-      color:var(--book-muted);
-      margin-bottom:12px;
-    }
+    .page .h1{font-weight:800; font-size:20px; margin-bottom:10px;}
+    .page .h2{font-weight:600; font-size:13px; color:var(--book-muted); margin-bottom:12px;}
+    .page .content{height:100%; overflow:hidden; font-size:14px; line-height:1.65; white-space:pre-wrap;}
 
-    /* Cover page layout */
     .cover{
       height:100%;
       display:flex;
@@ -447,34 +293,15 @@
       align-items:center;
       justify-content:center;
     }
-    .cover .coverImg img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .cover .coverTitle{
-      font-size:26px;
-      font-weight:800;
-      letter-spacing:.02em;
-    }
-    .cover .coverAuthor{
-      color:var(--book-muted);
-      font-size:13px;
-      margin-top:4px;
-    }
-    .cover .coverFooter{
-      color:var(--book-muted);
-      font-size:11px;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-    }
+    .cover .coverImg img{width:100%;height:100%;object-fit:cover;display:block;}
+    .cover .coverTitle{font-size:28px; font-weight:900; letter-spacing:.02em;}
+    .cover .coverAuthor{color:var(--book-muted); font-size:13px; margin-top:4px;}
+    .cover .coverFooter{color:var(--book-muted); font-size:11px; display:flex; justify-content:space-between;}
 
     .book-nav{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap:10px;
-      margin-top:10px;
-      color:#fff;
-      font-size:12px;
-      flex-wrap:wrap;
+      display:flex; justify-content:center; align-items:center;
+      gap:10px; flex-wrap:wrap;
+      color:#fff; font-size:12px;
     }
     .book-nav .counter{
       opacity:.9;
@@ -485,28 +312,27 @@
     }
 
     @media (max-width:800px){
-      main{ flex-direction:column; }
-      .sidebar{ width:100%; order:2; }
-      .editor-panel{ order:1; }
-      .book{ aspect-ratio: 10 / 14; } /* lebih sesuai portrait */
-      .spread{ grid-template-columns:1fr; }
-      .page.right{ display:none; } /* satu halaman pada skrin kecil */
+      main{flex-direction:column;}
+      .sidebar{width:100%; order:2;}
+      .editor-panel{order:1;}
+      .book{aspect-ratio: 10/14;}
+      .spread{grid-template-columns:1fr;}
+      .page.right{display:none;}
     }
   </style>
 </head>
 <body>
 <header>
   <div>
-    <div class="title">Studio Novel Minimal</div>
+    <div class="title">Studio Novel Minimal v2.1</div>
     <div class="subtitle">Simpan, sunting, backup & mod buku — lokal & offline</div>
   </div>
   <div class="right">
-    <div class="pill">Simpan di pelayar (localStorage)</div>
+    <div class="pill">localStorage</div>
   </div>
 </header>
 
 <main>
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="section-title">Senarai Karya</div>
 
@@ -526,12 +352,18 @@
       <label class="btn btn-outline btn-sm" for="importCsvInput">Import CSV</label>
       <input type="file" id="importCsvInput" accept=".csv,text/csv" style="display:none">
       <button class="btn btn-outline btn-sm" id="btnExportCsv">Eksport CSV</button>
+      <button class="btn btn-danger btn-sm" id="btnReset">Reset Data</button>
     </div>
 
     <div class="work-list" id="workList"></div>
+
+    <div class="section-title" style="margin-top:6px;">Log</div>
+    <div class="logbox" id="logbox">
+      <b>Status:</b> sedia.
+      <div class="logline" id="logline"></div>
+    </div>
   </aside>
 
-  <!-- EDITOR PANEL -->
   <section class="editor-panel">
     <div class="editor-top">
       <div class="field-group">
@@ -557,15 +389,14 @@
       </div>
     </div>
 
-    <!-- COVER tools -->
     <div class="cover-row">
       <div class="cover-thumb" id="coverThumb">
         <span style="font-size:10px;color:#6b7280;">Tiada cover</span>
       </div>
 
       <div class="cover-meta">
-        <div><b>Kulit buku</b> (muat naik imej JPG/PNG)</div>
-        <div style="opacity:.9">Imej akan diperkecil automatik untuk jimat storan.</div>
+        <div><b>Kulit buku</b> (JPG/PNG)</div>
+        <div>Imej diperkecil automatik untuk jimat storan.</div>
       </div>
 
       <div class="cover-actions">
@@ -576,7 +407,6 @@
     </div>
 
     <div class="chapters-bar" id="chapterTabs"></div>
-
     <textarea id="chapterContent" placeholder="Mula menulis bab di sini..."></textarea>
 
     <div class="editor-footer">
@@ -588,13 +418,13 @@
     </div>
 
     <div class="hint">
-      Tip: <b>Mod Buku</b> akan memecahkan teks kepada halaman (auto).  
-      <b>Eksport CSV</b> untuk salinan luar. <b>Salinan manuskrip</b> untuk backup dalaman.
+      Import/Export CSV v2.1 adalah stabil (koma/newline/cover).  
+      Mod Buku memecahkan teks kepada halaman secara automatik.
     </div>
   </section>
 </main>
 
-<!-- BOOK MODE OVERLAY -->
+<!-- BOOK MODE -->
 <div class="book-overlay" id="bookOverlay" aria-hidden="true">
   <div class="book-shell">
     <div class="book-topbar">
@@ -610,7 +440,7 @@
     </div>
 
     <div class="book-stage">
-      <div class="book" id="book">
+      <div class="book">
         <div class="spread">
           <div class="page left">
             <div class="content" id="bookLeft"></div>
@@ -626,14 +456,14 @@
 
     <div class="book-nav">
       <div class="counter" id="bookCounter">Halaman —</div>
-      <div class="counter" style="opacity:.85;">Tip: Klik “Seterusnya” untuk beleklah.</div>
+      <div class="counter" style="opacity:.85;">Kekunci: ← / → , Esc</div>
     </div>
   </div>
 </div>
 
 <script>
-(function(){
-  const STORAGE_KEY = 'novelStudioData_v2';
+(() => {
+  const STORAGE_KEY = 'novelStudioData_v21';
 
   const state = {
     works: [],
@@ -642,9 +472,9 @@
     isDirty: false,
     lastSavedAt: null,
 
-    // book mode
+    // Book mode
     bookPages: [],
-    bookIndex: 0, // index for left page
+    bookIndex: 0
   };
 
   const $ = id => document.getElementById(id);
@@ -666,13 +496,14 @@
     btnAddChapter: $('btnAddChapter'),
     btnExportCsv: $('btnExportCsv'),
     importCsvInput: $('importCsvInput'),
+    btnReset: $('btnReset'),
 
-    // cover
     coverInput: $('coverInput'),
     coverThumb: $('coverThumb'),
     btnRemoveCover: $('btnRemoveCover'),
 
-    // book mode
+    logline: $('logline'),
+
     btnBookMode: $('btnBookMode'),
     bookOverlay: $('bookOverlay'),
     btnBookClose: $('btnBookClose'),
@@ -684,39 +515,51 @@
     bookRight: $('bookRight'),
     pnumLeft: $('pnumLeft'),
     pnumRight: $('pnumRight'),
-    bookCounter: $('bookCounter'),
+    bookCounter: $('bookCounter')
   };
 
-  // ==== Storage ====
+  function log(msg){
+    const t = new Date().toLocaleString('ms-MY');
+    els.logline.textContent = `[${t}] ${msg}`;
+    console.log(msg);
+  }
+
+  // ===== Storage =====
   function loadFromStorage(){
     try{
       const raw = localStorage.getItem(STORAGE_KEY);
       if(!raw) return;
       const works = JSON.parse(raw);
       if(Array.isArray(works)) state.works = works;
-    }catch(e){ console.error('Gagal baca storage', e); }
+      log(`Load: ${state.works.length} karya.`);
+    }catch(e){
+      console.error(e);
+      log('Load gagal (data rosak).');
+    }
   }
 
   function saveToStorage(){
     try{
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state.works));
       state.lastSavedAt = new Date();
+      log('Simpan ke localStorage berjaya.');
     }catch(e){
-      console.error('Gagal simpan storage', e);
-      alert('Gagal simpan. Mungkin storan browser penuh (cover terlalu besar). Cuba buang/resize cover.');
+      console.error(e);
+      alert('Gagal simpan. Mungkin storan browser penuh. Cuba buang cover/kurangkan saiz.');
+      log('Simpan gagal: storan penuh?');
     }
   }
 
-  // ==== Core data ====
+  // ===== Core data =====
   function createWork(){
     const id = 'w_' + Date.now() + '_' + Math.random().toString(16).slice(2);
     return {
       id,
       genre: '',
       title: 'Karya tanpa tajuk',
-      author: 'Mazlee Ahmad',       // boleh ubah jika mahu
+      author: 'Mazlee Ahmad',
       isBackup: false,
-      coverDataUrl: '',             // cover image (dataURL)
+      coverDataUrl: '',
       chapters: [{ content:'', updatedAt:null }]
     };
   }
@@ -724,13 +567,14 @@
   function getCurrentWork(){
     return state.works.find(w => w.id === state.currentWorkId) || null;
   }
+
   function getCurrentChapter(){
     const w = getCurrentWork();
     if(!w) return null;
     return w.chapters[state.currentChapterIndex] || null;
   }
 
-  // ==== Dirty / Status ====
+  // ===== Status/Dirty =====
   function updateStatus(text, mode){
     els.statusText.textContent = text;
     els.statusText.className = '';
@@ -754,10 +598,11 @@
     return text.trim().split(/\s+/).filter(Boolean).length;
   }
 
-  // ==== Rendering ====
+  // ===== Render =====
   function renderWorkList(){
     const filter = els.genreFilter.value || '';
     els.workList.innerHTML = '';
+
     if(state.works.length === 0){
       const div = document.createElement('div');
       div.style.fontSize = '11px';
@@ -772,7 +617,6 @@
 
       const item = document.createElement('div');
       item.className = 'work-item' + (work.id === state.currentWorkId ? ' active' : '');
-      item.dataset.id = work.id;
 
       const title = document.createElement('div');
       title.className = 'title';
@@ -804,11 +648,7 @@
   function renderCoverThumb(){
     const w = getCurrentWork();
     els.coverThumb.innerHTML = '';
-    if(!w){
-      els.coverThumb.innerHTML = '<span style="font-size:10px;color:#6b7280;">Tiada cover</span>';
-      return;
-    }
-    if(!w.coverDataUrl){
+    if(!w || !w.coverDataUrl){
       els.coverThumb.innerHTML = '<span style="font-size:10px;color:#6b7280;">Tiada cover</span>';
       return;
     }
@@ -819,41 +659,40 @@
 
   function renderEditor(){
     const w = getCurrentWork();
+
+    const disabled = !w;
+    els.chapterContent.disabled = disabled;
+    els.btnSave.disabled = disabled;
+    els.btnDuplicate.disabled = disabled;
+    els.btnAddChapter.disabled = disabled;
+    els.btnBookMode.disabled = disabled;
+    els.btnRemoveCover.disabled = disabled;
+
     if(!w){
       els.genreInput.value = '';
       els.titleInput.value = '';
       els.chapterTabs.innerHTML = '';
       els.chapterContent.value = '';
-      els.chapterContent.disabled = true;
-
-      els.btnSave.disabled = true;
-      els.btnDuplicate.disabled = true;
-      els.btnAddChapter.disabled = true;
-      els.btnBookMode.disabled = true;
-      els.btnRemoveCover.disabled = true;
-
       els.wordCount.textContent = '0';
       updateStatus('Tiada karya dipilih.', 'clean');
       renderCoverThumb();
       return;
     }
 
-    els.chapterContent.disabled = false;
-    els.btnSave.disabled = false;
-    els.btnDuplicate.disabled = false;
-    els.btnAddChapter.disabled = false;
-    els.btnBookMode.disabled = false;
-    els.btnRemoveCover.disabled = false;
+    // safe guard
+    if(!Array.isArray(w.chapters) || w.chapters.length === 0) w.chapters = [{content:'',updatedAt:null}];
+    if(state.currentChapterIndex >= w.chapters.length) state.currentChapterIndex = 0;
 
     els.genreInput.value = w.genre || '';
     els.titleInput.value = w.title || '';
 
+    // tabs bab
     els.chapterTabs.innerHTML = '';
-    w.chapters.forEach((ch, idx) => {
+    w.chapters.forEach((_, idx) => {
       const tab = document.createElement('button');
       tab.type = 'button';
-      tab.className = 'chapter-tab' + (idx === state.currentChapterIndex ? ' active':'');
-      tab.textContent = 'Bab ' + (idx+1);
+      tab.className = 'chapter-tab' + (idx === state.currentChapterIndex ? ' active' : '');
+      tab.textContent = 'Bab ' + (idx + 1);
       tab.addEventListener('click', () => handleSwitchChapter(idx));
       els.chapterTabs.appendChild(tab);
     });
@@ -873,7 +712,7 @@
     }
   }
 
-  // ==== Sync ====
+  // ===== Sync =====
   function syncEditorToState(){
     const w = getCurrentWork();
     if(!w) return;
@@ -883,7 +722,7 @@
     ch.updatedAt = new Date().toISOString();
   }
 
-  // ==== Handlers ====
+  // ===== Handlers =====
   function handleNewWork(){
     if(!confirmIfDirty()) return;
     const w = createWork();
@@ -893,6 +732,7 @@
     state.isDirty = false;
     renderWorkList();
     renderEditor();
+    log('Karya baharu dicipta.');
   }
 
   function handleSwitchWork(id){
@@ -904,6 +744,7 @@
     state.isDirty = false;
     renderWorkList();
     renderEditor();
+    log('Tukar karya.');
   }
 
   function handleSwitchChapter(idx){
@@ -913,6 +754,7 @@
     state.currentChapterIndex = idx;
     state.isDirty = false;
     renderEditor();
+    log(`Tukar bab: ${idx+1}.`);
   }
 
   function handleSave(){
@@ -939,6 +781,7 @@
     state.works.unshift(copy);
     saveToStorage();
     renderWorkList();
+    log('Backup dibuat.');
   }
 
   function handleAddChapter(){
@@ -946,10 +789,12 @@
     if(!w) return;
     if(!confirmIfDirty()) return;
     syncEditorToState();
+
     w.chapters.push({content:'',updatedAt:null});
     state.currentChapterIndex = w.chapters.length - 1;
     state.isDirty = false;
     renderEditor();
+    log('Bab baharu ditambah.');
   }
 
   function handleGenreChange(){
@@ -977,7 +822,7 @@
     markDirty();
   }
 
-  // ==== Cover upload (with resize) ====
+  // ===== Cover upload (resize) =====
   function readImageAsDataUrl(file){
     return new Promise((resolve, reject) => {
       const fr = new FileReader();
@@ -988,7 +833,6 @@
   }
 
   function resizeImageDataUrl(dataUrl, maxW=900, maxH=1200, quality=0.82){
-    // output JPG dataURL (lebih kecil)
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => {
@@ -1002,10 +846,9 @@
         const ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0, w, h);
         try{
-          const out = canvas.toDataURL('image/jpeg', quality);
-          resolve(out);
+          resolve(canvas.toDataURL('image/jpeg', quality));
         }catch(e){
-          resolve(dataUrl); // fallback
+          resolve(dataUrl);
         }
       };
       img.onerror = () => resolve(dataUrl);
@@ -1025,9 +868,11 @@
       w.coverDataUrl = resized;
       markDirty();
       renderCoverThumb();
+      log('Cover dimuat naik.');
     }catch(err){
       console.error(err);
       alert('Gagal muat naik cover.');
+      log('Cover gagal muat naik.');
     }finally{
       e.target.value = '';
     }
@@ -1035,262 +880,68 @@
 
   function handleRemoveCover(){
     const w = getCurrentWork();
-    if(!w) return;
-    if(!w.coverDataUrl) return;
+    if(!w || !w.coverDataUrl) return;
     if(!confirm('Buang cover untuk karya ini?')) return;
     w.coverDataUrl = '';
     markDirty();
     renderCoverThumb();
+    log('Cover dibuang.');
   }
 
-  // ==== BOOK MODE ====
-  function collectFullManuscript(w){
-    // gabung bab -> satu teks besar dengan pemisah
-    const parts = [];
-    w.chapters.forEach((ch, i) => {
-      const head = `BAB ${i+1}\n`;
-      parts.push(head + (ch.content || '').trim());
-    });
-    return parts.join('\n\n');
+  // ===== CSV robust (quoted, supports newline) =====
+  function csvEscape(v){
+    const s = (v ?? '').toString();
+    return `"${s.replace(/"/g, '""')}"`;
   }
 
-  function makeBookPages(w){
-    // pages[0] = cover, pages[1] = toc
-    const pages = [];
-
-    // Cover page (as HTML)
-    const coverHtml = `
-      <div class="cover">
-        <div>
-          <div class="coverTitle">${escapeHtml(w.title || 'Karya')}</div>
-          <div class="coverAuthor">${escapeHtml(w.author || 'Penulis')}</div>
-        </div>
-        <div class="coverImg">
-          ${w.coverDataUrl ? `<img src="${w.coverDataUrl}" alt="cover">` : `<div style="font-size:12px;color:#6b7280;">(Tiada cover)</div>`}
-        </div>
-        <div class="coverFooter">
-          <span>${escapeHtml(w.genre || '')}</span>
-          <span>${new Date().toLocaleDateString('ms-MY')}</span>
-        </div>
-      </div>
-    `;
-    pages.push({type:'html', title:'Cover', content: coverHtml});
-
-    // TOC page
-    const tocLines = w.chapters.map((_, i) => `Bab ${i+1}`).join('\n');
-    const tocHtml = `
-      <div>
-        <div class="h1">Kandungan</div>
-        <div class="h2">${escapeHtml(w.title || '')}</div>
-        <div style="white-space:pre-wrap;line-height:1.9;font-size:14px;">${escapeHtml(tocLines)}</div>
-      </div>
-    `;
-    pages.push({type:'html', title:'TOC', content: tocHtml});
-
-    // Split manuscript into pages (text-based)
-    // Heuristik: ~ 1800–2200 aksara per page (boleh ubah)
-    const CHARS_PER_PAGE = 2000;
-
-    // untuk kekal bab berasingan: split setiap bab, lalu paginated
-    w.chapters.forEach((ch, idx) => {
-      const title = `Bab ${idx+1}`;
-      const raw = (ch.content || '').trim();
-      const full = raw ? raw : '';
-      const blocks = paginateText(full, CHARS_PER_PAGE);
-
-      // halaman pertama bab ada header
-      if(blocks.length === 0){
-        pages.push({type:'text', title, header:true, content:''});
-      }else{
-        blocks.forEach((b, bi) => {
-          pages.push({
-            type:'text',
-            title,
-            header: bi===0,
-            content: b
-          });
-        });
-      }
-    });
-
-    return pages;
-  }
-
-  function paginateText(text, charsPerPage){
-    if(!text) return [];
-    // pecah ikut perenggan
-    const paras = text.replace(/\r/g,'').split(/\n{2,}/);
-    const pages = [];
-    let buf = '';
-
-    function pushBuf(){
-      pages.push(buf.trim());
-      buf = '';
-    }
-
-    for(const p of paras){
-      const chunk = p.trim();
-      if(!chunk) continue;
-
-      // jika perenggan terlalu panjang, potong ikut ayat / ruang
-      if(chunk.length > charsPerPage){
-        const pieces = softSplit(chunk, charsPerPage);
-        for(const piece of pieces){
-          if((buf + '\n\n' + piece).trim().length > charsPerPage){
-            if(buf.trim()) pushBuf();
-            buf = piece;
-          }else{
-            buf = (buf ? (buf + '\n\n' + piece) : piece);
-          }
-        }
-        continue;
-      }
-
-      const candidate = buf ? (buf + '\n\n' + chunk) : chunk;
-      if(candidate.length > charsPerPage){
-        if(buf.trim()) pushBuf();
-        buf = chunk;
-      }else{
-        buf = candidate;
-      }
-    }
-    if(buf.trim()) pushBuf();
-    return pages;
-  }
-
-  function softSplit(s, limit){
-    // potong ikut ruang hampir limit
+  function parseCsvLine(line){
     const out = [];
-    let i = 0;
-    while(i < s.length){
-      let end = Math.min(i + limit, s.length);
-      if(end < s.length){
-        const back = s.lastIndexOf(' ', end);
-        if(back > i + Math.floor(limit*0.55)) end = back;
+    let cur = '';
+    let inQ = false;
+
+    for(let i=0;i<line.length;i++){
+      const ch = line[i];
+      if(inQ){
+        if(ch === '"'){
+          if(line[i+1] === '"'){ cur += '"'; i++; }
+          else inQ = false;
+        }else{
+          cur += ch;
+        }
+      }else{
+        if(ch === '"') inQ = true;
+        else if(ch === ','){ out.push(cur); cur = ''; }
+        else cur += ch;
       }
-      out.push(s.slice(i, end).trim());
-      i = end;
     }
-    return out.filter(Boolean);
+    out.push(cur);
+    return out;
   }
-
-  function escapeHtml(str){
-    return (str || '').replace(/[&<>"']/g, m => (
-      { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]
-    ));
-  }
-
-  function openBookMode(){
-    const w = getCurrentWork();
-    if(!w) return;
-    // sync text terkini (supaya preview ikut latest)
-    syncEditorToState();
-
-    state.bookPages = makeBookPages(w);
-    state.bookIndex = 0;
-
-    els.bookTitle.textContent = w.title || 'Karya';
-    els.bookMeta.textContent = (w.genre ? (w.genre + ' · ') : '') + (w.author || 'Penulis');
-    els.bookOverlay.classList.add('show');
-    els.bookOverlay.setAttribute('aria-hidden','false');
-
-    renderBookSpread();
-  }
-
-  function closeBookMode(){
-    els.bookOverlay.classList.remove('show');
-    els.bookOverlay.setAttribute('aria-hidden','true');
-  }
-
-  function renderBookSpread(){
-    const pages = state.bookPages;
-    const i = state.bookIndex;
-
-    const left = pages[i] || null;
-    const right = pages[i+1] || null;
-
-    renderBookPage(els.bookLeft, left);
-    renderBookPage(els.bookRight, right);
-
-    // page numbers (cover starts at blank, then pages start 1 after cover+toc)
-    const baseNum = Math.max(0, i - 1); // because pages[0]=cover, pages[1]=toc
-    els.pnumLeft.textContent = left ? (i<=1 ? '' : (baseNum).toString()) : '';
-    els.pnumRight.textContent = right ? (i+1<=1 ? '' : (baseNum+1).toString()) : '';
-
-    const totalReadable = Math.max(0, pages.length - 2);
-    const currentReadable = Math.max(0, i - 1);
-    els.bookCounter.textContent =
-      `Halaman ${Math.min(currentReadable, totalReadable)} / ${totalReadable}  ·  (Spread ${Math.floor(i/2)+1} / ${Math.ceil(pages.length/2)})`;
-
-    els.btnBookPrev.disabled = (i <= 0);
-    els.btnBookNext.disabled = (i >= pages.length - 1);
-  }
-
-  function renderBookPage(targetEl, page){
-    if(!page){
-      targetEl.innerHTML = '';
-      return;
-    }
-    if(page.type === 'html'){
-      targetEl.innerHTML = page.content;
-      return;
-    }
-    // text page with optional header
-    const header = page.header ? `<div class="h1">${escapeHtml(page.title)}</div>` : '';
-    targetEl.innerHTML = `
-      <div>
-        ${header}
-        <div style="white-space:pre-wrap;line-height:1.65;font-size:14px;">${escapeHtml(page.content || '')}</div>
-      </div>
-    `;
-  }
-
-  function bookNext(){
-    if(state.bookIndex >= state.bookPages.length - 1) return;
-    // move by 2 for spread if desktop; but on mobile we display single page -> still ok to move 1.
-    const isMobile = window.matchMedia('(max-width: 800px)').matches;
-    state.bookIndex += isMobile ? 1 : 2;
-    state.bookIndex = Math.min(state.bookIndex, state.bookPages.length - 1);
-    renderBookSpread();
-  }
-
-  function bookPrev(){
-    if(state.bookIndex <= 0) return;
-    const isMobile = window.matchMedia('(max-width: 800px)').matches;
-    state.bookIndex -= isMobile ? 1 : 2;
-    state.bookIndex = Math.max(state.bookIndex, 0);
-    renderBookSpread();
-  }
-
-  // ==== CSV (custom, encoded) ====
-  function safeEncode(v){ return encodeURIComponent(v || ''); }
-  function safeDecode(v){ try{return decodeURIComponent(v || '');}catch(e){return v || '';} }
 
   function handleExportCsv(){
     if(state.works.length === 0){
       alert('Tiada karya untuk dieksport.');
+      log('Eksport: tiada karya.');
       return;
     }
+    const header = [
+      'work_id','genre','title','author','is_backup','cover_dataurl','chapter_index','content','updated_at'
+    ];
     const rows = [];
-    // tambah cover + author
-    rows.push([
-      'work_id_enc','genre_enc','title_enc','author_enc','is_backup','cover_enc','chapter_index',
-      'content_enc','updated_at'
-    ].join(','));
+    rows.push(header.join(','));
 
     state.works.forEach(work => {
-      const coverEnc = safeEncode(work.coverDataUrl || '');
       work.chapters.forEach((ch, idx) => {
         rows.push([
-          safeEncode(work.id),
-          safeEncode(work.genre || ''),
-          safeEncode(work.title || ''),
-          safeEncode(work.author || ''),
-          work.isBackup ? '1':'0',
-          coverEnc,
-          idx.toString(),
-          safeEncode(ch.content || ''),
-          ch.updatedAt || ''
+          csvEscape(work.id),
+          csvEscape(work.genre || ''),
+          csvEscape(work.title || ''),
+          csvEscape(work.author || ''),
+          csvEscape(work.isBackup ? '1':'0'),
+          csvEscape(work.coverDataUrl || ''),
+          csvEscape(String(idx)),
+          csvEscape(ch.content || ''),
+          csvEscape(ch.updatedAt || '')
         ].join(','));
       });
     });
@@ -1305,65 +956,61 @@
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-  }
-
-  function handleImportCsvFile(e){
-    const file = e.target.files[0];
-    if(!file) return;
-    if(!confirmIfDirty()){
-      e.target.value = '';
-      return;
-    }
-    if(!confirm('Import CSV akan menggantikan semua karya yang ada sekarang. Teruskan?')){
-      e.target.value = '';
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = function(ev){
-      try{
-        const text = ev.target.result;
-        importFromCsvText(text);
-      }catch(err){
-        console.error(err);
-        alert('Gagal memproses fail CSV.');
-      }finally{
-        e.target.value = '';
-      }
-    };
-    reader.readAsText(file);
+    log(`Eksport: ${state.works.length} karya.`);
   }
 
   function importFromCsvText(text){
-    const lines = text.split(/\r?\n/).filter(l => l.trim().length>0);
+    const rawLines = text.replace(/\r/g,'').split('\n');
+
+    // rebuild logical rows (respect quoted newlines)
+    const lines = [];
+    let buf = '';
+
+    for(const ln of rawLines){
+      buf = buf ? (buf + '\n' + ln) : ln;
+
+      const m = buf.match(/"/g);
+      const quoteCount = m ? m.length : 0;
+
+      if(quoteCount % 2 === 0){
+        if(buf.trim().length) lines.push(buf);
+        buf = '';
+      }
+    }
+    if(buf.trim().length) lines.push(buf);
+
     if(lines.length <= 1){
       alert('Fail CSV kosong atau tidak sah.');
+      log('Import gagal: CSV kosong.');
       return;
     }
+
     const header = lines[0].split(',');
-    const hasCover = header.includes('cover_enc');
-    const hasAuthor = header.includes('author_enc');
+    const idx = (name) => header.indexOf(name);
+
+    if(idx('work_id') === -1 || idx('chapter_index') === -1 || idx('content') === -1){
+      alert('Format CSV tidak sepadan. Sila eksport dari aplikasi ini dahulu.');
+      log('Import gagal: header tidak sepadan.');
+      return;
+    }
 
     const worksMap = {};
+    let rowOk = 0;
 
     for(let i=1;i<lines.length;i++){
-      const cols = lines[i].split(',');
-      if(cols.length < 8) continue;
+      const cols = parseCsvLine(lines[i]);
 
-      // v2 columns:
-      // 0 id,1 genre,2 title,3 author,4 is_backup,5 cover,6 chapter_index,7 content,8 updated_at
-      const workId = safeDecode(cols[0]);
-      const genre = safeDecode(cols[1]);
-      const title = safeDecode(cols[2]);
+      const workId = cols[idx('work_id')] || '';
+      if(!workId) continue;
 
-      const author = hasAuthor ? safeDecode(cols[3]) : 'Mazlee Ahmad';
-      const isBackup = hasAuthor ? (cols[4] === '1') : (cols[3] === '1');
-
-      const cover = hasCover ? safeDecode(cols[5]) : '';
-      const chapterIndex = parseInt(hasCover ? cols[6] : cols[4],10) || 0;
-
-      const content = safeDecode(hasCover ? cols[7] : cols[5]);
-      const updatedAt = cols[hasCover ? 8 : 6] || null;
+      const genre = cols[idx('genre')] || '';
+      const title = cols[idx('title')] || '';
+      const author = cols[idx('author')] || 'Mazlee Ahmad';
+      const isBackup = (cols[idx('is_backup')] || '0') === '1';
+      const cover = cols[idx('cover_dataurl')] || '';
+      const chIndex = parseInt(cols[idx('chapter_index')] || '0', 10) || 0;
+      const content = cols[idx('content')] || '';
+      const updatedAt = cols[idx('updated_at')] || null;
 
       if(!worksMap[workId]){
         worksMap[workId] = {
@@ -1378,14 +1025,13 @@
       }
       const w = worksMap[workId];
       if(cover && !w.coverDataUrl) w.coverDataUrl = cover;
-      w.chapters[chapterIndex] = {content,updatedAt};
+      w.chapters[chIndex] = {content, updatedAt};
+      rowOk++;
     }
 
     const importedWorks = Object.values(worksMap).map(w => {
       w.chapters = w.chapters.filter(Boolean);
-      if(w.chapters.length === 0){
-        w.chapters = [{content:'',updatedAt:null}];
-      }
+      if(w.chapters.length === 0) w.chapters = [{content:'',updatedAt:null}];
       if(typeof w.coverDataUrl !== 'string') w.coverDataUrl = '';
       if(!w.author) w.author = 'Mazlee Ahmad';
       return w;
@@ -1395,50 +1041,262 @@
     state.currentWorkId = state.works[0]?.id || null;
     state.currentChapterIndex = 0;
     state.isDirty = false;
+
     saveToStorage();
     renderWorkList();
     renderEditor();
+
     alert('Import CSV selesai. ' + state.works.length + ' karya dimuatkan.');
+    log(`Import OK: rows=${rowOk}, karya=${state.works.length}`);
   }
 
-  // ==== Events & init ====
+  function handleImportCsvFile(e){
+    const file = e.target.files[0];
+    if(!file) return;
+
+    if(!confirmIfDirty()){ e.target.value = ''; return; }
+    if(!confirm('Import CSV akan menggantikan semua karya semasa. Teruskan?')){
+      e.target.value = ''; return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try{
+        importFromCsvText(ev.target.result);
+      }catch(err){
+        console.error(err);
+        alert('Gagal memproses CSV.');
+        log('Import gagal: exception.');
+      }finally{
+        e.target.value = '';
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  // ===== Book mode =====
+  function escapeHtml(str){
+    return (str || '').replace(/[&<>"']/g, m => (
+      { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]
+    ));
+  }
+
+  function paginateText(text, charsPerPage){
+    if(!text) return [];
+    const paras = text.replace(/\r/g,'').split(/\n{2,}/);
+    const pages = [];
+    let buf = '';
+
+    function pushBuf(){ pages.push(buf.trim()); buf=''; }
+
+    for(const p of paras){
+      const chunk = p.trim();
+      if(!chunk) continue;
+
+      if(chunk.length > charsPerPage){
+        const pieces = softSplit(chunk, charsPerPage);
+        for(const piece of pieces){
+          const cand = buf ? (buf + '\n\n' + piece) : piece;
+          if(cand.length > charsPerPage){
+            if(buf.trim()) pushBuf();
+            buf = piece;
+          }else buf = cand;
+        }
+        continue;
+      }
+
+      const candidate = buf ? (buf + '\n\n' + chunk) : chunk;
+      if(candidate.length > charsPerPage){
+        if(buf.trim()) pushBuf();
+        buf = chunk;
+      }else buf = candidate;
+    }
+    if(buf.trim()) pushBuf();
+    return pages;
+  }
+
+  function softSplit(s, limit){
+    const out = [];
+    let i = 0;
+    while(i < s.length){
+      let end = Math.min(i + limit, s.length);
+      if(end < s.length){
+        const back = s.lastIndexOf(' ', end);
+        if(back > i + Math.floor(limit*0.55)) end = back;
+      }
+      out.push(s.slice(i, end).trim());
+      i = end;
+    }
+    return out.filter(Boolean);
+  }
+
+  function makeBookPages(w){
+    const pages = [];
+
+    const coverHtml = `
+      <div class="cover">
+        <div>
+          <div class="coverTitle">${escapeHtml(w.title || 'Karya')}</div>
+          <div class="coverAuthor">${escapeHtml(w.author || 'Penulis')}</div>
+        </div>
+        <div class="coverImg">
+          ${w.coverDataUrl ? `<img src="${w.coverDataUrl}" alt="cover">`
+            : `<div style="font-size:12px;color:#6b7280;">(Tiada cover)</div>`}
+        </div>
+        <div class="coverFooter">
+          <span>${escapeHtml(w.genre || '')}</span>
+          <span>${new Date().toLocaleDateString('ms-MY')}</span>
+        </div>
+      </div>`;
+    pages.push({type:'html', title:'Cover', content:coverHtml});
+
+    const tocLines = w.chapters.map((_, i) => `Bab ${i+1}`).join('\n');
+    const tocHtml = `
+      <div>
+        <div class="h1">Kandungan</div>
+        <div class="h2">${escapeHtml(w.title || '')}</div>
+        <div style="white-space:pre-wrap;line-height:1.9;font-size:14px;">${escapeHtml(tocLines)}</div>
+      </div>`;
+    pages.push({type:'html', title:'TOC', content:tocHtml});
+
+    const CHARS_PER_PAGE = 2000;
+
+    w.chapters.forEach((ch, idx) => {
+      const title = `Bab ${idx+1}`;
+      const raw = (ch.content || '').trim();
+      const blocks = paginateText(raw, CHARS_PER_PAGE);
+
+      if(blocks.length === 0){
+        pages.push({type:'text', title, header:true, content:''});
+      }else{
+        blocks.forEach((b, bi) => {
+          pages.push({type:'text', title, header:(bi===0), content:b});
+        });
+      }
+    });
+
+    return pages;
+  }
+
+  function renderBookPage(targetEl, page){
+    if(!page){ targetEl.innerHTML=''; return; }
+    if(page.type === 'html'){ targetEl.innerHTML = page.content; return; }
+    const header = page.header ? `<div class="h1">${escapeHtml(page.title)}</div>` : '';
+    targetEl.innerHTML = `${header}<div style="white-space:pre-wrap;line-height:1.65;font-size:14px;">${escapeHtml(page.content||'')}</div>`;
+  }
+
+  function renderBookSpread(){
+    const pages = state.bookPages;
+    const i = state.bookIndex;
+    const left = pages[i] || null;
+    const right = pages[i+1] || null;
+
+    renderBookPage(els.bookLeft, left);
+    renderBookPage(els.bookRight, right);
+
+    const baseNum = Math.max(0, i - 1); // after cover+toc
+    els.pnumLeft.textContent = (left && i>1) ? String(baseNum) : '';
+    els.pnumRight.textContent = (right && (i+1)>1) ? String(baseNum+1) : '';
+
+    const totalReadable = Math.max(0, pages.length - 2);
+    const currentReadable = Math.max(0, i - 1);
+    els.bookCounter.textContent =
+      `Halaman ${Math.min(currentReadable,totalReadable)} / ${totalReadable}`;
+
+    els.btnBookPrev.disabled = (i <= 0);
+    els.btnBookNext.disabled = (i >= pages.length - 1);
+  }
+
+  function openBookMode(){
+    const w = getCurrentWork();
+    if(!w) return;
+    syncEditorToState();
+    state.bookPages = makeBookPages(w);
+    state.bookIndex = 0;
+
+    els.bookTitle.textContent = w.title || 'Karya';
+    els.bookMeta.textContent = (w.genre ? (w.genre + ' · ') : '') + (w.author || 'Penulis');
+
+    els.bookOverlay.classList.add('show');
+    els.bookOverlay.setAttribute('aria-hidden','false');
+    renderBookSpread();
+    log('Mod Buku dibuka.');
+  }
+
+  function closeBookMode(){
+    els.bookOverlay.classList.remove('show');
+    els.bookOverlay.setAttribute('aria-hidden','true');
+    log('Mod Buku ditutup.');
+  }
+
+  function bookNext(){
+    if(state.bookIndex >= state.bookPages.length - 1) return;
+    const isMobile = window.matchMedia('(max-width: 800px)').matches;
+    state.bookIndex += isMobile ? 1 : 2;
+    state.bookIndex = Math.min(state.bookIndex, state.bookPages.length - 1);
+    renderBookSpread();
+  }
+
+  function bookPrev(){
+    if(state.bookIndex <= 0) return;
+    const isMobile = window.matchMedia('(max-width: 800px)').matches;
+    state.bookIndex -= isMobile ? 1 : 2;
+    state.bookIndex = Math.max(state.bookIndex, 0);
+    renderBookSpread();
+  }
+
+  // ===== Reset =====
+  function handleReset(){
+    if(!confirm('Reset akan memadam semua data dalam app ini (localStorage). Teruskan?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    state.works = [];
+    state.currentWorkId = null;
+    state.currentChapterIndex = 0;
+    state.isDirty = false;
+    state.lastSavedAt = null;
+    renderWorkList();
+    renderEditor();
+    log('Reset selesai.');
+  }
+
+  // ===== Events =====
   function initEvents(){
     els.btnNewWork.addEventListener('click', handleNewWork);
-    els.genreFilter.addEventListener('change', () => renderWorkList());
+    els.genreFilter.addEventListener('change', renderWorkList);
+
     els.genreInput.addEventListener('change', handleGenreChange);
     els.titleInput.addEventListener('input', handleTitleChange);
     els.chapterContent.addEventListener('input', handleContentInput);
+
     els.btnSave.addEventListener('click', handleSave);
     els.btnDuplicate.addEventListener('click', handleDuplicate);
     els.btnAddChapter.addEventListener('click', handleAddChapter);
+
     els.btnExportCsv.addEventListener('click', handleExportCsv);
     els.importCsvInput.addEventListener('change', handleImportCsvFile);
+    els.btnReset.addEventListener('click', handleReset);
 
-    // cover
     els.coverInput.addEventListener('change', handleCoverUpload);
     els.btnRemoveCover.addEventListener('click', handleRemoveCover);
 
-    // book mode
     els.btnBookMode.addEventListener('click', () => {
       if(state.isDirty){
-        // bukan wajib, tapi lebih selamat
-        if(confirm('Ada perubahan belum disimpan. Mod Buku akan gunakan teks terkini (tanpa simpan). Teruskan?')){
+        if(confirm('Ada perubahan belum disimpan. Mod Buku gunakan teks terkini tanpa simpan. Teruskan?')){
           openBookMode();
         }
         return;
       }
       openBookMode();
     });
+
     els.btnBookClose.addEventListener('click', closeBookMode);
     els.btnBookNext.addEventListener('click', bookNext);
     els.btnBookPrev.addEventListener('click', bookPrev);
 
-    // close overlay on background click
     els.bookOverlay.addEventListener('click', (ev) => {
       if(ev.target === els.bookOverlay) closeBookMode();
     });
 
-    // keyboard navigation in book mode
     window.addEventListener('keydown', (ev) => {
       if(!els.bookOverlay.classList.contains('show')) return;
       if(ev.key === 'Escape') closeBookMode();
@@ -1446,7 +1304,7 @@
       if(ev.key === 'ArrowLeft') bookPrev();
     });
 
-    window.addEventListener('beforeunload', function(e){
+    window.addEventListener('beforeunload', (e) => {
       if(!state.isDirty) return;
       e.preventDefault();
       e.returnValue = '';
@@ -1460,19 +1318,15 @@
   function init(){
     loadFromStorage();
 
-    if(state.works.length === 0){
-      const w = createWork();
-      w.title = 'Contoh manuskrip pertama';
-      state.works.push(w);
-      state.currentWorkId = w.id;
-    }else{
-      // pastikan struktur v2 (cover/author) wujud
-      state.works.forEach(w => {
-        if(typeof w.coverDataUrl !== 'string') w.coverDataUrl = '';
-        if(!w.author) w.author = 'Mazlee Ahmad';
-      });
-      state.currentWorkId = state.works[0].id;
-    }
+    // Ensure structure
+    state.works.forEach(w => {
+      if(!w.author) w.author = 'Mazlee Ahmad';
+      if(typeof w.coverDataUrl !== 'string') w.coverDataUrl = '';
+      if(!Array.isArray(w.chapters)) w.chapters = [{content:'',updatedAt:null}];
+      if(w.chapters.length === 0) w.chapters = [{content:'',updatedAt:null}];
+    });
+
+    state.currentWorkId = state.works[0]?.id || null;
 
     initEvents();
     renderWorkList();
